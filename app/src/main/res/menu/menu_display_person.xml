@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.kmurph.convoapp.DisplayPersonActivity">
+
+    <item android:id="@+id/note_plus"
+        android:icon="@mipmap/ic_action_new"
+        android:title="@string/note_plus"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/note_edit"
+        android:title="@string/note_edit"
+        android:icon="@mipmap/ic_action_edit"
+        app:showAsAction="ifRoom" />
+</menu>
