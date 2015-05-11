@@ -1,4 +1,4 @@
-package com.example.kmurph.convoapp;
+package com.dudebro.kmurph.convoapp;
 
 public class Person {
     private int _id;

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.kmurph.convoapp.DisplayPersonActivity">
+    tools:context="com.dudebro.kmurph.convoapp.DisplayPersonActivity">
 
     <item android:id="@+id/note_plus"
         android:icon="@mipmap/ic_action_new"

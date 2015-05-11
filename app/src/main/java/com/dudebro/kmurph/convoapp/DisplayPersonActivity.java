@@ -1,11 +1,11 @@
-package com.example.kmurph.convoapp;
+package com.dudebro.kmurph.convoapp;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,8 +45,6 @@ public class DisplayPersonActivity extends ActionBarActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-                Log.d(TAG, "long click");
-                Log.d(TAG, "id: " + id);
                 Note note = h.getNoteFromPos(pos, person);
                 adapter.remove(note.getNote());
                 h.deleteNote(note);
@@ -86,8 +84,6 @@ public class DisplayPersonActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        Log.i("yar", "val: " + id);
 
         if (id == R.id.note_plus) {
             NoteDialog dialog = new NoteDialog();

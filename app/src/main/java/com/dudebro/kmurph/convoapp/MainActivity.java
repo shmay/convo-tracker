@@ -1,4 +1,4 @@
-package com.example.kmurph.convoapp;
+package com.dudebro.kmurph.convoapp;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 
 public class MainActivity extends ActionBarActivity {
-    public final static String NAME = "com.example.kmurph.NAME";
+    public final static String NAME = "com.dudebro.kmurph.NAME";
     public static final String TAG = "MainActivity";
 
     final Context context = this;
@@ -49,17 +49,14 @@ public class MainActivity extends ActionBarActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-                Log.d(TAG, "long click");
-                Log.d(TAG, "id: " + id);
                 final String p = (String) adapter.getItem(pos);
                 Person person = h.findPerson(p);
-                Log.d(TAG, "note count: " + h.noteCountForPerson(person));
 
                 if (h.noteCountForPerson(person) > 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
                     builder.setMessage("Are you sure you'd like to destroy " + p + " and all of its associated notes?")
-                            .setTitle("Ya sure?").setPositiveButton("finish him", new DialogInterface.OnClickListener() {
+                            .setTitle("Ya sure?").setPositiveButton("yah", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             adapter.remove(p);
                             h.deletePerson(p);
@@ -112,9 +109,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void clickButton(View view) {
         // Do something in response to button
-
-        Log.i("sendmsg", "sendMsg");
-
     }
 
     @Override
@@ -124,8 +118,6 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        Log.i("yar", "val: " + id);
-
         if (id == R.id.action_plus) {
             InputDialog.person = null;
             InputDialog dialog = new InputDialog();
@@ -134,8 +126,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if (id == R.id.action_about) {
-            Log.d(TAG, "fucking aboot");
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setMessage("Use ConvoTracker to remember questions / thoughts / ideas / whateva that you'd like to present to people")

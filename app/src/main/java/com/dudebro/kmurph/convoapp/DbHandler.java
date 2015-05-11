@@ -1,4 +1,4 @@
-package com.example.kmurph.convoapp;
+package com.dudebro.kmurph.convoapp;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
+//import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,6 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("on create", "asdf");
         String CREATE_PEOPLE_TABLE = "CREATE TABLE " +
                 TABLE_PEOPLE + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_NAME
@@ -48,7 +47,7 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     public void addPerson(String name) {
-        Log.d(TAG, "add person: " + name);
+       // Log.d(TAG, "add person: " + name);
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
 
@@ -81,12 +80,12 @@ public class DbHandler extends SQLiteOpenHelper {
             note = null;
         }
 
-        Log.d(TAG, "note: " + note.getNote());
+//        Log.d(TAG, "note: " + note.getNote());
         return note;
     }
 
     public void addNote(String name, Person person) {
-        Log.d(TAG, "add note: " + name);
+//        Log.d(TAG, "add note: " + name);
         ContentValues values = new ContentValues();
         values.put(NOTE_COLUMN, name);
         values.put(PERSONID_COLUMN, person.getID());
@@ -98,7 +97,7 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     public Person findPerson(String name) {
-        Log.d(TAG, "find person: " + name);
+//        Log.d(TAG, "find person: " + name);
 
         String query = "Select * FROM " + TABLE_PEOPLE + " WHERE " + COLUMN_NAME + " =  \"" + name + "\"";
 
@@ -108,16 +107,16 @@ public class DbHandler extends SQLiteOpenHelper {
 
         Person person = new Person();
 
-        Log.d("DbHandler","yup");
+//        Log.d("DbHandler","yup");
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
             person.setID(Integer.parseInt(cursor.getString(0)));
             person.setName(cursor.getString(1));
-            Log.d("setName", cursor.getString(1));
+//            Log.d("setName", cursor.getString(1));
             cursor.close();
         } else {
-            Log.d(TAG, "nope");
+//            Log.d(TAG, "nope");
 
             person = null;
         }
@@ -170,7 +169,7 @@ public class DbHandler extends SQLiteOpenHelper {
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("select * from notes where notes.person_id = " + person.getID(), null );
-        Log.d(TAG, "res: " + res);
+//        Log.d(TAG, "res: " + res);
         res.moveToFirst();
         while(res.isAfterLast() == false){
             array_list.add(res.getString(res.getColumnIndex(NOTE_COLUMN)));
@@ -188,7 +187,6 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     public boolean deletePerson(String name) {
-
         boolean result = false;
 
         String query = "Select * FROM " + TABLE_PEOPLE + " WHERE " + COLUMN_NAME + " =  \"" + name + "\"";
@@ -213,10 +211,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
 
-        Log.d(TAG, "onUpgrade: " + oldVersion + " : " + newVersion);
-
-
-
+//        Log.d(TAG, "onUpgrade: " + oldVersion + " : " + newVersion);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.kmurph.convoapp;
+package com.dudebro.kmurph.convoapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,16 +6,16 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-public class NoteDialog extends DialogFragment {
-    public static final String TAG = "NoteDialog";
+public class InputDialog extends DialogFragment {
+    public static final String TAG = "InputDialog";
     public static Person person;
-    public static Note static_note;
+    public static DisplayPersonActivity displayPersonActivity;
 
     public static ArrayAdapter<String> adapter;
 
@@ -24,7 +24,7 @@ public class NoteDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View view = (inflater.inflate(R.layout.note_dialog, null));
+        final View view = (inflater.inflate(R.layout.input_dialog, null));
         final Context context = getActivity();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
@@ -35,17 +35,15 @@ public class NoteDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         EditText input = (EditText) view.findViewById(R.id.input);
                         DbHandler h = new DbHandler(context);
-                        String note = (String) input.getText().toString();
+                        String name = (String) input.getText().toString();
 
                         if (person == null) {
-                            h.updateNote(note,static_note);
-                            adapter.remove(static_note.getNote());
-                            adapter.add(note);
+                            h.addPerson(name);
+                            adapter.add(name);
                             adapter.notifyDataSetChanged();
                         } else {
-                            adapter.add(note);
-                            adapter.notifyDataSetChanged();
-                            h.addNote(note, person);
+                            h.updateName(name, person);
+                            displayPersonActivity.setTitle("notes for " + name);
                         }
 
                         person = null;
@@ -53,20 +51,17 @@ public class NoteDialog extends DialogFragment {
                 })
                 .setNegativeButton(R.string.input_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        NoteDialog.this.getDialog().cancel();
+                        InputDialog.this.getDialog().cancel();
                         person = null;
                     }
                 });
 
-
-        Log.d(TAG, "person: " + person);
-
         if (person == null) {
-            EditText input = (EditText) view.findViewById(R.id.input);
-            builder.setTitle("Edit Note");
-            input.setText(static_note.getNote());
+            builder.setTitle("Add Person");
         } else {
-            builder.setTitle("Add Note");
+            EditText input = (EditText) view.findViewById(R.id.input);
+            builder.setTitle("Edit Name");
+            input.setText(person.getName());
         }
 
         Dialog dialog = builder.create();
